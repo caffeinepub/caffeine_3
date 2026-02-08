@@ -1,0 +1,63 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-reproduce-the-current-deployment-failure-and-identify-the-exact-failing-step-frontend-build-canister-build-candid-generation-asset-bundling-or-dfx-deploy-step-capturing-the-full-error-output-and-the-command-that-triggers-it-in-the-project",
+      "featureTitle": "Reproduce the current deployment failure and identify the exact failing step (frontend build, canister build, candid generation, asset bundling, or dfx deploy step), capturing the full error output and the command that triggers it in the project.",
+      "files": [
+        "frontend/docs/deployment-failure-investigation.md"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-17"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-apply-the-minimal-code-configuration-changes-required-to-resolve-the-deployment-error-while-preserving-existing-application-behavior-authentication-routing-wallet-investments-referrals-and-ui-theme",
+      "featureTitle": "Apply the minimal code/configuration changes required to resolve the deployment error while preserving existing application behavior (authentication, routing, wallet, investments, referrals, and UI theme).",
+      "files": [
+        "frontend/docs/deployment-failure-investigation.md"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-18"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-lightweight-automated-pre-deploy-verification-step-that-fails-fast-when-the-known-deployment-breaking-condition-reappears-e-g-typecheck-build-step-and-or-a-canister-build-check-and-ensure-it-runs-as-part-of-the-standard-build-workflow-used-by-the-platform",
+      "featureTitle": "Add a lightweight, automated pre-deploy verification step that fails fast when the known deployment-breaking condition reappears (e.g., typecheck/build step and/or a canister build check), and ensure it runs as part of the standard build workflow used by the platform.",
+      "files": [
+        "frontend/docs/deployment-failure-investigation.md",
+        "frontend/scripts/predeploy-verify.sh"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-19"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-08T20:29:10.598Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 3,
+    "implemented": 3,
+    "items": [
+      {
+        "id": "REQ-17",
+        "summary": "Reproduce the current deployment failure and identify the exact failing step (frontend build, canister build, candid generation, asset bundling, or dfx deploy step), capturing the full error output and the command that triggers it in the project.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/docs/deployment-failure-investigation.md",
+          "frontend/docs/deployment-failure-investigation.md"
+        ],
+        "matchedFiles": [
+          "frontend/docs/deployment-failure-investigation.md",
+          "frontend/docs/deployment-failure-investigation.md"
+        ]
+      },
+      {
+        "id": "REQ-18",
+        "summary": "Apply the minimal code/configuration changes required to resolve the deployment error while preserving existing application behavior (authentication, routing, wallet, investments, referrals, and UI theme).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/config.ts",
+          "frontend/src/backend.d.ts",
+          "frontend/docs/deployment-failure-investigation.md"
+        ],
+        "matchedFiles": [
+          "frontend/src/backend.d.ts",
+          "frontend/docs/deployment-failure-investigation.md"
+        ]
+      },
+      {
+        "id": "REQ-19",
+        "summary": "Add a lightweight, automated pre-deploy verification step that fails fast when the known deployment-breaking condition reappears (e.g., typecheck/build step and/or a canister build check), and ensure it runs as part of the standard build workflow used by the platform.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/scripts/predeploy-verify.sh",
+          "frontend/package.json",
+          "frontend/docs/deployment-failure-investigation.md"
+        ],
+        "matchedFiles": [
+          "frontend/scripts/predeploy-verify.sh",
+          "frontend/docs/deployment-failure-investigation.md"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/main.mo",
+    "build-request.json",
+    "build-template/README.md",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/docs/deployment-failure-investigation.md",
+    "frontend/scripts/predeploy-verify.sh",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.idl.ts",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

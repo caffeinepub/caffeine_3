@@ -1,0 +1,74 @@
+{
+  "kind": "build_request",
+  "title": "Investigate and fix deployment failure",
+  "priority": "high",
+  "requirements": [
+    {
+      "id": "REQ-17",
+      "text": "Reproduce the current deployment failure and identify the exact failing step (frontend build, canister build, candid generation, asset bundling, or dfx deploy step), capturing the full error output and the command that triggers it in the project.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Deployment error fix"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Running the same build/deploy pipeline that currently fails produces a clearly identified root cause (specific file + line or specific configuration/value).",
+        "The build request implementation includes a short, developer-readable note in the repo (e.g., in a README or a dedicated docs file) describing: how to reproduce the failure, the root cause, and what was changed to fix it."
+      ]
+    },
+    {
+      "id": "REQ-18",
+      "text": "Apply the minimal code/configuration changes required to resolve the deployment error while preserving existing application behavior (authentication, routing, wallet, investments, referrals, and UI theme).",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Deployment error fix"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The project successfully completes the platform deployment step without errors.",
+        "After deployment, the app loads in the browser and the backend canister is reachable from the frontend (no runtime initialization errors on first load).",
+        "Core screens (/ , /news, /quant, /futures, /mine, /wallet, /invitation, /register) render without blank screens or console errors attributable to the fix."
+      ]
+    },
+    {
+      "id": "REQ-19",
+      "text": "Add a lightweight, automated pre-deploy verification step that fails fast when the known deployment-breaking condition reappears (e.g., typecheck/build step and/or a canister build check), and ensure it runs as part of the standard build workflow used by the platform.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Deployment error fix"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A single command (documented in the repo) can be run to validate build readiness and it exits non-zero on failure.",
+        "The verification step passes on the fixed codebase and would have caught the original deployment failure."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must remain a single Motoko actor in backend/main.mo (no additional backend services).",
+    "Do not modify files under frontend/src/components/ui (compose instead).",
+    "Do not modify frontend immutable paths listed in SYSTEM_CONTEXT (frontend/src/hooks/useInternetIdentity.ts/tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui).",
+    "Use English for any user-facing text."
+  ],
+  "nonGoals": [
+    "Adding new product features unrelated to deployment stability.",
+    "Refactoring the app architecture beyond what is necessary to fix the deployment pipeline.",
+    "Introducing external databases, non-Motoko backends, or third-party auth providers."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

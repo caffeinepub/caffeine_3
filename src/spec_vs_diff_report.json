@@ -1,0 +1,65 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-08T20:29:10.595Z",
+  "summary": "The diff partially addresses the deployment failure by adding a backend Candid IDL file and adding documentation describing a TypeScript build failure. However, several key fix artifacts described in the docs (config and type definitions) and the automated pre-deploy verification step are not actually present as added/modified files in the diff summary, and there are additional unrelated changes (project state metadata and UI/page import refactors) that were not requested.",
+  "missing_requirements": [
+    {
+      "id": "REQ-17",
+      "requirement": "Capture the full error output and the exact command that triggers the current deployment failure, and include a short developer-readable note in the repo describing reproduction, root cause, and what changed to fix it.",
+      "reason": "A docs note was added, but the reproduction section only lists abbreviated TypeScript error messages and does not include the full error output/logs; the command is mentioned generically (\"npm run build\"/\"pnpm build\") rather than the exact failing platform pipeline step/command output.",
+      "evidence": [
+        "frontend/docs/deployment-failure-investigation.md"
+      ]
+    },
+    {
+      "id": "REQ-18",
+      "requirement": "Apply minimal code/config changes to resolve the deployment error (missing frontend config/type files used by immutable hook imports) while preserving existing behavior.",
+      "reason": "The investigation doc claims new files were created (frontend/src/config.ts and frontend/src/backend.d.ts), but the diff summary only shows frontend/src/backend.idl.ts as added. Without the missing modules, the described TypeScript build failure (cannot find '../config' and '../backend') would not be resolved based on the provided diff.",
+      "evidence": [
+        "frontend/docs/deployment-failure-investigation.md",
+        "frontend/src/backend.idl.ts"
+      ]
+    },
+    {
+      "id": "REQ-19",
+      "requirement": "Add a lightweight automated pre-deploy verification step that fails fast and ensure it runs as part of the standard build workflow; document the single command.",
+      "reason": "The doc includes a shell script in a code block, but the script file itself is not listed as added/modified in the diff summary, nor is there evidence it is wired into the standard build workflow (e.g., package.json scripts / CI / platform build command integration).",
+      "evidence": [
+        "frontend/docs/deployment-failure-investigation.md"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Changes to backend canister logic/types/access control beyond what is evidenced as necessary to fix the frontend TypeScript deployment failure described (missing frontend modules and typings).",
+      "reason": "The BuildRequest focuses on fixing deployment pipeline failure; the diff shows substantial backend/main.mo modifications (types, authorization checks, traps). The diff summary does not link these backend behavior changes to the described root cause (missing frontend TS files and typing for a method).",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "UI/page import refactors and various frontend component/page summary updates unrelated to deployment stability.",
+      "reason": "The BuildRequest is specifically about deployment failure investigation/fix and a pre-deploy check; the diff summary indicates multiple page/component import changes (e.g., importing CryptoCard/NeonIndicator from different locations) which are not requested and risk modifying frontend behavior.",
+      "evidence": [
+        "frontend-file-summaries.txt"
+      ]
+    },
+    {
+      "description": "Project metadata/state update describing unrelated architecture details (JWT auth, password hashing, database schema) which contradict the constraint of keeping a single Motoko actor and avoiding unrelated refactors/features.",
+      "reason": "The BuildRequest is about deployment stability and explicitly forbids unrelated new features/architecture changes; updating project_state.json to describe JWT/database architecture is unrelated to the requested deployment fix.",
+      "evidence": [
+        "project_state.json"
+      ]
+    }
+  ],
+  "confidence": 0.74,
+  "changed_files": [
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/docs/deployment-failure-investigation.md",
+    "frontend/scripts/predeploy-verify.sh",
+    "frontend/src/backend.idl.ts",
+    "project_state.json"
+  ]
+}

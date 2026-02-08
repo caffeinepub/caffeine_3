@@ -1,0 +1,250 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 7,
+  "summary": "Mobile-first crypto investment web application named \"Caffeine\" with app-style UI, authentication, investment plans, wallet (deposit/withdraw/history), and a critical 2-level referral system, built with a backend-ready API architecture (JWT auth, password hashing, validation) and a defined database schema (MongoDB/PostgreSQL).",
+  "architectural_notes": [
+    "Project name: Caffeine.",
+    "API-based architecture with backend-ready structure (suggested: Next.js/React frontend; Node.js + Express backend).",
+    "Security requirements: JWT authentication, password hashing, input validation.",
+    "Database entities required: Users, Wallets, Investments, Referral_Earnings, Transactions; DB can be MongoDB or PostgreSQL.",
+    "Referral links follow pattern: https://caffeine.app/register?ref=USERID with 2-level commissions (L1 20%, L2 10%).",
+    "UI requirements: mobile-first, app-style bottom tab bar, crypto trading look (neon indicators, card layout, rounded buttons, smooth animations), English UI with later Sinhala extensibility.",
+    "Bot feature requires scheduling/timezone-aware start times per country and an automatic-off mechanism (server-side scheduler/cron or canister timer depending on deployment)."
+  ],
+  "known_issues": [
+    "Deployment/build failed during deployment; deployment error needs investigation and fix."
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-implement-mobile-first-app-style-layout-with-a-consistent-crypto-trading-visual-theme-dark-light-mix-including-card-based-ui-rounded-buttons-neon-green-red-indicators-for-up-down-and-smooth-ui-animations-ensure-fast-loading-and-responsive-behavior-across-common-mobile-widths",
+      "title": "Implement mobile-first app-style layout with a consistent crypto-trading visual theme (dark + light mix), including card-based UI, rounded buttons, neon green/red indicators for up/down, and smooth UI animations; ensure fast loading and responsive behavior across common mobile widths.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-bottom-tab-navigation-with-the-following-tabs-and-routes-home-news-quant-futures-mine-profile-tabs-must-be-persistent-and-optimized-for-mobile-touch-interaction",
+      "title": "Add bottom tab navigation with the following tabs and routes: Home, News, Quant, Futures, Mine (Profile). Tabs must be persistent and optimized for mobile touch interaction.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-authentication-flows-using-internet-identity-for-sign-in-and-a-post-auth-onboarding-profile-step-that-collects-and-stores-a-email-and-b-optional-referral-code-from-the-url-query-param-or-manual-entry-support-opening-a-referral-link-in-the-format-https-caffeine-app-register-ref-userid-and-pre-filling-the-referral-field",
+      "title": "Create authentication flows using Internet Identity for sign-in, and a post-auth onboarding/profile step that collects and stores (a) email and (b) optional referral code from the URL query param or manual entry; support opening a referral link in the format https://caffeine.app/register?ref=USERID and pre-filling the referral field.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-home-dashboard-screen-ui-with-1-a-banner-section-themed-around-ai-quant-trading-charts-bull-icon-2-quick-action-buttons-for-contracts-contract-records-api-wallet-invitation-3-market-overview-cards-market-trend-increase-drop-long-short-ratio-and-4-a-market-list-table-list-showing-trading-pair-price-and-24h-fluctuation-seeded-with-static-sample-data-initially",
+      "title": "Build the Home/Dashboard screen UI with: (1) a banner section themed around AI Quant Trading (charts + bull icon), (2) quick action buttons for Contracts, Contract Records, API, Wallet, Invitation, (3) market overview cards (Market Trend: Increase/Drop, Long/Short Ratio), and (4) a market list table/list showing trading pair, price, and 24h fluctuation (seeded with static sample data initially).",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-investment-plans-module-with-support-for-multiple-plans-and-a-working-buy-now-flow-display-plan-cards-including-smart-treasure-30-days-fixed-profit-2-3-bonus-reward-8-investment-days-30-and-allow-users-to-initiate-a-purchase-by-entering-an-amount-create-an-investment-record-and-corresponding-transaction-record-when-purchased",
+      "title": "Implement Investment Plans module with support for multiple plans and a working Buy Now flow: display plan cards (including Smart Treasure (30 Days), fixed profit 2.3%, bonus reward 8%, investment days 30) and allow users to initiate a purchase by entering an amount; create an Investment record and corresponding Transaction record when purchased.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-wallet-module-with-1-current-user-balance-2-deposit-usdt-flow-that-creates-a-pending-complete-transaction-and-updates-balance-accordingly-3-withdraw-flow-with-basic-validation-e-g-cannot-withdraw-more-than-balance-that-creates-a-transaction-and-updates-balance-and-4-transaction-history-list-filtering-by-type-deposit-withdraw-profit-and-status",
+      "title": "Implement Wallet module with: (1) current user balance, (2) Deposit (USDT) flow that creates a pending/complete Transaction and updates balance accordingly, (3) Withdraw flow with basic validation (e.g., cannot withdraw more than balance) that creates a Transaction and updates balance, and (4) Transaction History list filtering by type (deposit/withdraw/profit) and status.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-the-2-level-referral-system-end-to-end-generate-a-unique-referral-code-link-per-user-track-referred-by-when-a-new-user-onboards-via-referral-calculate-and-store-commission-earnings-at-level-1-20-and-level-2-10-based-on-referred-users-investment-amounts-provide-a-referral-dashboard-screen-showing-totals-total-team-members-level-1-count-level-2-count-total-referral-earnings-and-detailed-lists-for-level-1-and-level-2-entries-user-email-id-investment-amount-earned-commission",
+      "title": "Implement the 2-level referral system end-to-end: generate a unique referral code/link per user; track referred_by when a new user onboards via referral; calculate and store commission earnings at Level 1 (20%) and Level 2 (10%) based on referred users’ investment amounts; provide a Referral Dashboard screen showing totals (total team members, level 1 count, level 2 count, total referral earnings) and detailed lists for Level 1 and Level 2 entries (user email/ID, investment amount, earned commission).",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-basic-input-validation-and-security-controls-appropriate-for-an-internet-computer-canister-app-validate-email-format-on-profile-save-validate-numeric-ranges-for-deposit-withdraw-invest-amounts-and-enforce-that-users-can-only-access-modify-their-own-wallet-investments-transactions-and-referral-data",
+      "title": "Add basic input validation and security controls appropriate for an Internet Computer canister app: validate email format on profile save, validate numeric ranges for deposit/withdraw/invest amounts, and enforce that users can only access/modify their own wallet, investments, transactions, and referral data.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-placeholder-screens-for-news-quant-futures-and-mine-profile-tabs-that-match-the-app-theme-and-are-wired-to-navigation-mine-should-display-user-profile-info-principal-derived-user-id-email-referral-link-and-shortcuts-to-wallet-and-invitation-referral-dashboard",
+      "title": "Create placeholder screens for News, Quant, Futures, and Mine (Profile) tabs that match the app theme and are wired to navigation; Mine should display user profile info (principal-derived user id, email), referral link, and shortcuts to Wallet and Invitation/Referral Dashboard.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-dedicated-login-page-route-and-update-the-authentication-entry-experience-so-users-can-explicitly-navigate-to-register-and-login-screens-internet-identity-based-while-keeping-existing-authgate-behavior-intact",
+      "title": "Add a dedicated Login page/route and update the authentication entry experience so users can explicitly navigate to Register and Login screens (Internet Identity based), while keeping existing AuthGate behavior intact.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-on-the-register-page-automatically-display-the-referral-invite-code-under-an-invite-code-section-field-prefilled-from-the-referral-link-query-parameter-ref-code-when-present",
+      "title": "On the Register page, automatically display the referral/invite code under an \"Invite Code\" section/field, prefilled from the referral link query parameter (?ref=CODE) when present.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-current-news-placeholder-with-a-working-binance-crypto-daily-news-updates-screen-that-fetches-and-displays-a-list-of-the-latest-crypto-news-items-when-the-news-tab-is-opened",
+      "title": "Replace the current News placeholder with a working \"Binance/Crypto Daily News\" updates screen that fetches and displays a list of the latest crypto news items when the News tab is opened.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-rename-the-quant-tab-label-in-the-bottom-navigation-to-bot-and-update-the-associated-page-ui-to-be-an-ai-bot-control-screen-that-includes-an-on-off-toggle",
+      "title": "Rename the \"Quant\" tab label in the bottom navigation to \"Bot\" and update the associated page UI to be an \"AI Bot\" control screen that includes an On/Off toggle.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-scheduled-start-capability-for-the-ai-bot-based-on-the-provided-country-start-times-and-add-an-automatic-bot-off-capability-that-can-be-enabled-disabled-by-the-user",
+      "title": "Add scheduled start capability for the AI Bot based on the provided country start times, and add an automatic bot-off capability that can be enabled/disabled by the user.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-reproduce-the-current-deployment-failure-and-identify-the-exact-failing-step-frontend-build-canister-build-candid-generation-asset-bundling-or-dfx-deploy-step-capturing-the-full-error-output-and-the-command-that-triggers-it-in-the-project",
+      "title": "Reproduce the current deployment failure and identify the exact failing step (frontend build, canister build, candid generation, asset bundling, or dfx deploy step), capturing the full error output and the command that triggers it in the project.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-the-minimal-code-configuration-changes-required-to-resolve-the-deployment-error-while-preserving-existing-application-behavior-authentication-routing-wallet-investments-referrals-and-ui-theme",
+      "title": "Apply the minimal code/configuration changes required to resolve the deployment error while preserving existing application behavior (authentication, routing, wallet, investments, referrals, and UI theme).",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-lightweight-automated-pre-deploy-verification-step-that-fails-fast-when-the-known-deployment-breaking-condition-reappears-e-g-typecheck-build-step-and-or-a-canister-build-check-and-ensure-it-runs-as-part-of-the-standard-build-workflow-used-by-the-platform",
+      "title": "Add a lightweight, automated pre-deploy verification step that fails fast when the known deployment-breaking condition reappears (e.g., typecheck/build step and/or a canister build check), and ensure it runs as part of the standard build workflow used by the platform.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Mobile-first app-style web UI with dark/light crypto trading theme, responsive performance, and bottom tab navigation (Home/News/Quant/Futures/Mine)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "User authentication: register/login with email+password, referral code support on registration, JWT auth, password hashing, input validation",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Home/Dashboard screen: AI Quant Trading themed banner, quick action buttons (Contracts/Records/API/Wallet/Invitation), and market overview/trends/market list UI",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Investment plans module: multiple plans support (e.g., Smart Treasure 30 days, fixed profit/bonus), Buy Now flow, and backend-ready smart-contract/plan structure",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Wallet system: user balance, USDT deposit/withdraw flows, and transaction history (deposit/withdraw/profit) with backend-ready endpoints",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "2-level referral system (critical): unique referral link, Level 1 (20%) and Level 2 (10%) commission tracking, and referral dashboard metrics and listings",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Database design + models/collections for Users, Wallets, Investments, Referral_Earnings, Transactions (MongoDB/PostgreSQL compatible)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Admin-ready backend/API structure (Node/Express suggested) with deploy-ready setup (e.g., Vercel/Railway)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Implement backend data models and persistence (single Motoko canister) for: Users (id, principal, email, referral_code, referred_by), Wallets (user_id, balance), Investments (user_id, plan_id, amount, start_date, end_date), Referral_Earnings (user_id, from_user_id, level, percentage, amount), Transactions (user_id, type, status, amount, created_at). Provide canister methods needed by the UI to read/write these entities.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Add dedicated Register & Login pages/flows in the UI (mobile-first)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "On Register page, automatically show/prefill referral/invite code under Invite Code field (from referral link/query param)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "News tab: add Binance/Crypto daily news update system (fetch and display latest crypto news)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "Rename Quant tab to Bot and add AI Bot On/Off controls, including scheduled start times by country (Sri Lanka 6:00 PM, Nepal 10:00 AM, India 8:00 PM, Korea 7:00 PM, Bangladesh 6:00 PM) and automatic bot off capability",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-21",
+      "summary": "Implement backend support for per-user AI Bot state (enabled/disabled) and scheduling configuration, including methods to read and update this state securely (only the caller can read/update their own bot settings).",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Caffeine",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

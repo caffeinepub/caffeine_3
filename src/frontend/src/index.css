@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.75rem;
+        /* Light mode - crypto trading theme */
+        --background: 0.98 0 0;
+        --foreground: 0.15 0 0;
+        --card: 1 0 0;
+        --card-foreground: 0.15 0 0;
+        --popover: 1 0 0;
+        --popover-foreground: 0.15 0 0;
+        --primary: 0.45 0.18 264;
+        --primary-foreground: 0.98 0 0;
+        --secondary: 0.92 0 0;
+        --secondary-foreground: 0.15 0 0;
+        --muted: 0.94 0 0;
+        --muted-foreground: 0.50 0 0;
+        --accent: 0.92 0 0;
+        --accent-foreground: 0.15 0 0;
+        --destructive: 0.55 0.22 25;
+        --destructive-foreground: 0.98 0 0;
+        --border: 0.88 0 0;
+        --input: 0.88 0 0;
+        --ring: 0.45 0.18 264;
+        
+        /* Crypto-specific colors */
+        --crypto-up: 0.65 0.20 145;
+        --crypto-down: 0.55 0.22 25;
+        --crypto-glow: 0.45 0.18 264;
+    }
+
+    .dark {
+        /* Dark mode - primary crypto trading theme */
+        --background: 0.12 0 0;
+        --foreground: 0.95 0 0;
+        --card: 0.16 0 0;
+        --card-foreground: 0.95 0 0;
+        --popover: 0.18 0 0;
+        --popover-foreground: 0.95 0 0;
+        --primary: 0.60 0.24 264;
+        --primary-foreground: 0.98 0 0;
+        --secondary: 0.20 0 0;
+        --secondary-foreground: 0.95 0 0;
+        --muted: 0.22 0 0;
+        --muted-foreground: 0.60 0 0;
+        --accent: 0.28 0 0;
+        --accent-foreground: 0.95 0 0;
+        --destructive: 0.60 0.22 25;
+        --destructive-foreground: 0.98 0 0;
+        --border: 0.25 0 0;
+        --input: 0.25 0 0;
+        --ring: 0.60 0.24 264;
+        
+        /* Crypto-specific colors */
+        --crypto-up: 0.70 0.22 145;
+        --crypto-down: 0.60 0.22 25;
+        --crypto-glow: 0.60 0.24 264;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-feature-settings: "rlig" 1, "calt" 1;
+    }
+}
+
+@layer utilities {
+    .crypto-up {
+        color: oklch(var(--crypto-up));
+    }
+    
+    .crypto-down {
+        color: oklch(var(--crypto-down));
+    }
+    
+    .crypto-glow {
+        box-shadow: 0 0 20px oklch(var(--crypto-glow) / 0.3);
+    }
+    
+    .crypto-card {
+        border-radius: 0.75rem;
+        border-width: 1px;
+        background-color: oklch(var(--card) / 0.5);
+        backdrop-filter: blur(12px);
+    }
+    
+    .neon-border {
+        border: 1px solid oklch(var(--crypto-glow) / 0.3);
+    }
+    
+    .animate-pulse-glow {
+        animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 10px oklch(var(--crypto-glow) / 0.2);
+    }
+    50% {
+        box-shadow: 0 0 20px oklch(var(--crypto-glow) / 0.4);
+    }
+}
+
+/* Mobile-first optimizations */
+@media (max-width: 640px) {
+    body {
+        font-size: 14px;
+    }
+    
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* Prevent horizontal scroll on mobile */
+html, body {
+    overflow-x: hidden;
+    max-width: 100vw;
+}

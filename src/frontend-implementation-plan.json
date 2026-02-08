@@ -1,0 +1,78 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Frontend-only plan to diagnose and fix deployment-breaking build errors",
+  "requirements": [
+    {
+      "id": "REQ-17",
+      "summary": "Document how to reproduce the current deployment failure and identify the failing build step from the frontend side.",
+      "acceptanceCriteria": [
+        "Running the same build/deploy pipeline that currently fails produces a clearly identified root cause (specific file + line or specific configuration/value).",
+        "The build request implementation includes a short, developer-readable note in the repo (e.g., in a README or a dedicated docs file) describing: how to reproduce the failure, the root cause, and what was changed to fix it."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/docs/deployment-failure-investigation.md",
+          "operation": "create",
+          "description": "Add a concise developer note capturing: (1) the exact command(s) used by the platform to build the frontend, (2) the observed error output, (3) the identified failing step (e.g., TypeScript compile during frontend build), (4) the root cause in terms of specific missing/mismatched frontend modules/types, and (5) the minimal changes applied to fix it. Keep it reproducible and copy/paste friendly."
+        },
+        {
+          "path": "frontend/docs/deployment-failure-investigation.md",
+          "operation": "modify",
+          "description": "After implementing the fix, update the doc with the final verified reproduction command(s) and the final verified error/fix details (root cause + confirmation that the command now passes)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-18",
+      "summary": "Apply minimal frontend code/config changes to resolve the deployment error while preserving existing behavior and routes.",
+      "acceptanceCriteria": [
+        "The project successfully completes the platform deployment step without errors.",
+        "After deployment, the app loads in the browser and the backend canister is reachable from the frontend (no runtime initialization errors on first load).",
+        "Core screens (/ , /news, /quant, /futures, /mine, /wallet, /invitation, /register) render without blank screens or console errors attributable to the fix."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/config.ts",
+          "operation": "create",
+          "description": "Create the missing frontend backend-connection module exported as createActorWithConfig (as imported by frontend/src/hooks/useActor.ts). Implement it using the existing core-infrastructure setup/conventions so the app can create an anonymous or authenticated actor without changing routing/auth/UI. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/backend.d.ts",
+          "operation": "modify",
+          "description": "Update the frontend backend interface typing to include any actor methods that are used by the immutable hook frontend/src/hooks/useActor.ts but missing from the TypeScript interface (notably the access-control initialization method invoked during actor creation). This should be a minimal typing fix that unblocks typecheck/build without changing runtime behavior."
+        },
+        {
+          "path": "frontend/docs/deployment-failure-investigation.md",
+          "operation": "modify",
+          "description": "Record the exact frontend-side root cause fixed by adding frontend/src/config.ts and adjusting backend typing (include the original failing import/type error and the resolved state), and explicitly note that immutable files (hooks/useActor.ts, hooks/useInternetIdentity.ts/tsx, main.tsx, components/ui) were not modified."
+        }
+      ]
+    },
+    {
+      "id": "REQ-19",
+      "summary": "Add a lightweight pre-deploy verification command for the frontend that fails fast when the deployment-breaking condition returns.",
+      "acceptanceCriteria": [
+        "A single command (documented in the repo) can be run to validate build readiness and it exits non-zero on failure.",
+        "The verification step passes on the fixed codebase and would have caught the original deployment failure."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/scripts/predeploy-verify.sh",
+          "operation": "create",
+          "description": "Add a small script that runs the same frontend validation the platform relies on (at minimum: dependency install assumption + typecheck/build command) and exits non-zero on failure. Keep it minimal and fast-failing to catch missing-module/type issues like the current failure."
+        },
+        {
+          "path": "frontend/package.json",
+          "operation": "create",
+          "description": "Add a frontend package.json (if one is not present in this workspace) or align with the platform’s expected build workflow by defining a single verification script (e.g., verify/predeploy) that runs the frontend build readiness checks. Ensure the script name and command are documented and stable."
+        },
+        {
+          "path": "frontend/docs/deployment-failure-investigation.md",
+          "operation": "modify",
+          "description": "Document the single pre-deploy verification command (from frontend/package.json or the script wrapper), explain what it checks, and explicitly state how it would have failed on the original broken state (e.g., missing ../config module or actor typing mismatch during build)."
+        }
+      ]
+    }
+  ]
+}
